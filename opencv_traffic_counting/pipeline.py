@@ -314,7 +314,7 @@ class CsvWriter(PipelineProcessor):
         super(CsvWriter, self).__init__()
 
         self.fp = open(os.path.join(path, name), 'w')
-        self.writer = csv.DictWriter(self.fp, fieldnames=['time', 'vehicles'])
+        self.writer = csv.DictWriter(self.fp, fieldnames=['Time','Frame Number', 'Detected Vehicles in Current Frame'])
         self.writer.writeheader()
         self.start_time = start_time
         self.fps = fps
@@ -331,7 +331,7 @@ class CsvWriter(PipelineProcessor):
 
         time = ((self.start_time + int(frame_number / self.fps)) * 100
                 + int(100.0 / self.fps) * (frame_number % self.fps))
-        self.writer.writerow({'time': time, 'vehicles': _count})
+        self.writer.writerow({'Time': time,'Frame Number': frame_number, 'Detected Vehicles in Current Frame': _count})
         self.prev = count
 
         return context
