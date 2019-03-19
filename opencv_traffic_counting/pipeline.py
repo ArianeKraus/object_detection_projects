@@ -324,7 +324,7 @@ class CsvWriter(PipelineProcessor):
 
     def __call__(self, context):
         frame_number = context['frame_number']
-        count = _count = context['vehicle_count_right']
+        count = _count = context['vehicle_count_right'] + context['vehicle_count_left']
 
         if self.prev:
             _count = count - self.prev
